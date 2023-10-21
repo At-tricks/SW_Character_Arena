@@ -20,7 +20,7 @@ app.get('/search', async (req, res) => {
         const character2Data = await dataAccess.getCharacterByName(character2Name);
 
         const comparisonResult = compareson.compareAttributes(character1Data, character2Data);
-        const overallWinner = compareson.calculateOverallWinner(comparisonResult, character1Data, character2Data)
+        const overallWinner = compareson.calculateOverallWinner()
 
         res.json({
             result: comparisonResult,
