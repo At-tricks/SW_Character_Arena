@@ -2,19 +2,15 @@ const swapi = require('swapi-node');
 
 async function handleMissingAttribute(attribute, getDataFunction) {
     if (attribute === undefined) {
-        return "0"; // or use a sentinel value like null
+        return 0; // or use a sentinel value like null
     }
     try {
         // Fetch additional data
         return await getDataFunction(attribute);
     } catch (error) {
         console.error(`Error fetching ${attribute} data:`, error);
-        return "0"; // or use a sentinel value
+        return 0; // or use a sentinel value
     }
-}
-
-function assignDefaultIfUndefined(value, defaultValue) {
-    return typeof value !== 'undefined' ? value : defaultValue;
 }
 
 //Return all Character names
@@ -114,6 +110,10 @@ async function getVehicleDetails(url) {
     }
 }
 
+function assignDefaultIfUndefined(value, defaultValue) {
+    return typeof value !== 'undefined' ? value : defaultValue;
+}
+
 //Return Character attributes
 async function getCharacterByName(name) {
     try {
@@ -123,11 +123,11 @@ async function getCharacterByName(name) {
         const character = characterData.results[0];
 
         // Assign default values to attributes that may be missing
-        character.birth_year = assignDefaultIfUndefined(character.birth_year, "0");
-        character.height = assignDefaultIfUndefined(character.height, "0");
-        character.mass = assignDefaultIfUndefined(character.mass, "0");
-        character.eye_color = assignDefaultIfUndefined(character.eye_color, "0");
-        character.hair_color = assignDefaultIfUndefined(character.hair_color, "0");
+        character.birth_year = assignDefaultIfUndefined(character.birth_year, 0);
+        character.height = assignDefaultIfUndefined(character.height, 0);
+        character.mass = assignDefaultIfUndefined(character.mass, 0);
+        character.eye_color = assignDefaultIfUndefined(character.eye_color, 0);
+        character.hair_color = assignDefaultIfUndefined(character.hair_color, 0);
 
         // Fetch additional data
         character.homeWorld = await handleMissingAttribute(character.homeworld, getHomeWorldDetails);
