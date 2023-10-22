@@ -56,10 +56,7 @@ async function getHomeWorldDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching homeWorld data:', error);
-        return {
-            name: 'Unknown',
-            diameter: 0,
-        };
+        throw error;
     }
 }
 
@@ -73,10 +70,7 @@ async function getSpeciesDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching species data:', error);
-        return {
-            name: 'Unknown',
-            lifeSpan: 0,
-        };
+        throw error;
     }
 }
 
@@ -90,10 +84,7 @@ async function getVehicleDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching vehicle data:', error);
-        return {
-            name: 'Unknown',
-            cargoCapacity: 0,
-        };
+        throw error;
     }
 }
 

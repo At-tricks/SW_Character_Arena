@@ -42,8 +42,9 @@ function convertAttributesToInt(character) {
     character.height = parseInt(character.height);
     character.mass = parseInt(character.mass);
 
-    // Map the character's eyeColor and hairColor to its corresponding integer value
+    // Map the character's eyeColor to its corresponding integer value
     character.eyeColor = eyeColorValueSet[character.eyeColor];
+    // Map the character's hairColor to its corresponding integer value
     character.hairColor = hairColorValueSet[character.hairColor];
 
     // Convert nested object attributes
@@ -79,17 +80,17 @@ function compareAttributes(character1, character2) {
 
     // Define a comparison configuration object
     const attributeComparisonConfig = {
-        birthYear: 'lower', //lower birth year wins
-        height: 'higher', //higher height wins
-        mass: 'higher', //higher mass wins
-        eye_color: 'higher', //higher eye color wins (using the integer value)
-        hair_color: 'higher', //higher hair color wins (using the integer value)
-        homeWorld: 'higher', //higher homeWorld  wins (using the diameter value)
-        species: 'higher', //higher species wins (using the lifeSpan value)
-        vehicles: 'higher', //higher vehicle wins (using the cargoCapacity value)
+        birthYear: 'lower', // The lower birth year wins
+        height: 'higher', // The higher height wins
+        mass: 'higher', // The higher mass wins
+        eye_color: 'higher', // The higher eye color wins (using the integer value)
+        hair_color: 'higher', // The higher hair color wins (using the integer value)
+        homeWorld: 'higher', // The higher homeWorld diameter wins
+        species: 'higher', // The higher species lifeSpan wins
+        vehicles: 'higher', // The higher vehicle cargoCapacity wins
     };
 
-    // Convert attribute values to integers 
+    // Convert attribute values to integers using the provided function
     character1 = convertAttributesToInt(character1);
     character2 = convertAttributesToInt(character2);
 
@@ -144,6 +145,7 @@ function calculateOverallWinner(comparisonResults) {
 };
 
 module.exports = {
+    convertAttributeValues,
     compareAttributes,
     calculateOverallWinner,
 };

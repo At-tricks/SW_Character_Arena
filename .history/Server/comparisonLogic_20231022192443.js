@@ -89,7 +89,7 @@ function compareAttributes(character1, character2) {
         vehicles: 'higher', //higher vehicle wins (using the cargoCapacity value)
     };
 
-    // Convert attribute values to integers 
+    // Convert attribute values to integers using the provided function
     character1 = convertAttributesToInt(character1);
     character2 = convertAttributesToInt(character2);
 
@@ -144,6 +144,7 @@ function calculateOverallWinner(comparisonResults) {
 };
 
 module.exports = {
+    convertAttributeValues,
     compareAttributes,
     calculateOverallWinner,
 };

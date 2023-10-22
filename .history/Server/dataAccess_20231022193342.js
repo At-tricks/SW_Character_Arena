@@ -56,10 +56,7 @@ async function getHomeWorldDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching homeWorld data:', error);
-        return {
-            name: 'Unknown',
-            diameter: 0,
-        };
+        throw error;
     }
 }
 
@@ -69,14 +66,11 @@ async function getSpeciesDetails(url) {
         const speciesData = await swapi.get(url);
         return {
             name: speciesData.name,
-            lifeSpan: speciesData.average_lifespan,
+            lifeSpan: speciesData.lifespan,
         };
     } catch (error) {
         console.error('Error fetching species data:', error);
-        return {
-            name: 'Unknown',
-            lifeSpan: 0,
-        };
+        throw error;
     }
 }
 
@@ -90,10 +84,7 @@ async function getVehicleDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching vehicle data:', error);
-        return {
-            name: 'Unknown',
-            cargoCapacity: 0,
-        };
+        throw error;
     }
 }
 
@@ -105,7 +96,6 @@ async function getCharacterByName(name) {
         });
         const character = characterData.results[0];
 
-        console.log(character.species)
         // Fetch additional data
         const homeWorldDetails = await getHomeWorldDetails(character.homeworld);
         const speciesDetails = await getSpeciesDetails(character.species[0]);

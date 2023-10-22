@@ -144,6 +144,7 @@ function calculateOverallWinner(comparisonResults) {
 };
 
 module.exports = {
+    convertAttributeValues,
     compareAttributes,
     calculateOverallWinner,
 };

@@ -49,51 +49,42 @@ async function getAllHairColors() {
 //Return character home world's Name and Diameter
 async function getHomeWorldDetails(url) {
     try {
-        const homeWorldData = await swapi.get(url);
+        const homeWorldData = await swapi.getFromUrl(url);
         return {
             name: homeWorldData.name,
             diameter: homeWorldData.diameter,
         };
     } catch (error) {
         console.error('Error fetching homeWorld data:', error);
-        return {
-            name: 'Unknown',
-            diameter: 0,
-        };
+        throw error;
     }
 }
 
 //Return character species' Name and Life Span
 async function getSpeciesDetails(url) {
     try {
-        const speciesData = await swapi.get(url);
+        const speciesData = await swapi.getFromUrl(url);
         return {
             name: speciesData.name,
-            lifeSpan: speciesData.average_lifespan,
+            lifeSpan: speciesData.lifespan,
         };
     } catch (error) {
         console.error('Error fetching species data:', error);
-        return {
-            name: 'Unknown',
-            lifeSpan: 0,
-        };
+        throw error;
     }
 }
 
 //Return character vehicale's Name and Cargo Capacity
 async function getVehicleDetails(url) {
     try {
-        const vehicleData = await swapi.get(url);
+        const vehicleData = await swapi.getFromUrl(url);
         return {
             name: vehicleData.name,
             cargoCapacity: vehicleData.cargo_capacity,
         };
     } catch (error) {
         console.error('Error fetching vehicle data:', error);
-        return {
-            name: 'Unknown',
-            cargoCapacity: 0,
-        };
+        throw error;
     }
 }
 
@@ -105,7 +96,6 @@ async function getCharacterByName(name) {
         });
         const character = characterData.results[0];
 
-        console.log(character.species)
         // Fetch additional data
         const homeWorldDetails = await getHomeWorldDetails(character.homeworld);
         const speciesDetails = await getSpeciesDetails(character.species[0]);

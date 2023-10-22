@@ -3,12 +3,13 @@ const {
     getAllHairColors
 } = require('./dataAccess');
 
-//Helper function for convertAttributesToInt
-async function convertColorAttributesToInt() {
+
+async function convertAttributeValues() {
     // Retrieve available eye colors and hair colors
     const eyeColors = await getAllEyeColors();
     const hairColors = await getAllHairColors();
 
+    // Create objects for eye colors and hair colors
     const eyeColorValues = {};
     const hairColorValues = {};
 
@@ -19,6 +20,7 @@ async function convertColorAttributesToInt() {
         uniqueValue += 10; // Increase by 10 for uniqueness
     }
 
+    // Reset unique value
     uniqueValue = 10;
 
     // Assign unique integer values to each hair color
@@ -27,24 +29,27 @@ async function convertColorAttributesToInt() {
         uniqueValue += 10;
     }
 
+    // Return the objects with assigned values
     return {
         eyeColors: eyeColorValues,
         hairColors: hairColorValues,
     };
 };
 
-function convertAttributesToInt(character) {
-    const eyeColorValueSet = convertColorAttributesToInt().eyeColors;
-    const hairColorValueSet = convertColorAttributesToInt().hairColors;
+function convertAttributesToInt(character, colorValueSets) {
+    const eyeColorValueSet = colorValueSets.eyeColors;
+    const hiarColorValueSet = colorValueSets.hairColors;
+    let characterEyeInt = 0;
+    let characterHairInt = 0;
 
     // Convert height, mass and birth_year to integers  (e.g. of Birth year format, "33BBY")
     character.birthYear = parseInt(character.birthYear);
     character.height = parseInt(character.height);
     character.mass = parseInt(character.mass);
 
-    // Map the character's eyeColor and hairColor to its corresponding integer value
-    character.eyeColor = eyeColorValueSet[character.eyeColor];
-    character.hairColor = hairColorValueSet[character.hairColor];
+    //assigning eye and hair color integers
+    character.eyeColor = characterEyeInt;
+    character.hairColor = characterHairInt;
 
     // Convert nested object attributes
     character.homeWorld.diameter = parseInt(character.homeWorld.diameter);
@@ -52,7 +57,7 @@ function convertAttributesToInt(character) {
     character.vehicles.cargoCapacity = parseInt(character.vehicles.cargoCapacity);
 
     return character
-};
+}
 
 // Utility function to retrieve a nested attribute (e.g., 'homeWorld.diameter')
 function getNestedAttribute(object, path) {
@@ -62,9 +67,9 @@ function getNestedAttribute(object, path) {
         value = value[attribute];
     }
     return value;
-};
+}
 
-function compareAttributes(character1, character2) {
+function compareAttributes(character1, character2, colorValueSets) {
     // Initialize results and wins for each character
     const results = {
         character1: {
@@ -79,17 +84,17 @@ function compareAttributes(character1, character2) {
 
     // Define a comparison configuration object
     const attributeComparisonConfig = {
-        birthYear: 'lower', //lower birth year wins
-        height: 'higher', //higher height wins
-        mass: 'higher', //higher mass wins
-        eye_color: 'higher', //higher eye color wins (using the integer value)
-        hair_color: 'higher', //higher hair color wins (using the integer value)
-        homeWorld: 'higher', //higher homeWorld  wins (using the diameter value)
-        species: 'higher', //higher species wins (using the lifeSpan value)
-        vehicles: 'higher', //higher vehicle wins (using the cargoCapacity value)
+        birthYear: 'lower', // The lower birth year wins
+        height: 'higher', // The higher height wins
+        mass: 'higher', // The higher mass wins
+        eye_color: 'higher', // The higher eye color wins (using the integer value)
+        hair_color: 'higher', // The higher hair color wins (using the integer value)
+        homeWorld: 'higher', // The higher homeWorld diameter wins
+        species: 'higher', // The higher species lifeSpan wins
+        vehicles: 'higher', // The higher vehicle cargoCapacity wins
     };
 
-    // Convert attribute values to integers 
+    // Convert attribute values to integers using the provided function
     character1 = convertAttributesToInt(character1);
     character2 = convertAttributesToInt(character2);
 
@@ -128,7 +133,7 @@ function compareAttributes(character1, character2) {
         }
     }
     return results;
-};
+}
 
 function calculateOverallWinner(comparisonResults) {
     let character1WinCount = comparisonResults.character1.wins;
@@ -141,9 +146,10 @@ function calculateOverallWinner(comparisonResults) {
     } else {
         return 'Equal';
     }
-};
+}
 
 module.exports = {
+    convertAttributeValues,
     compareAttributes,
     calculateOverallWinner,
 };

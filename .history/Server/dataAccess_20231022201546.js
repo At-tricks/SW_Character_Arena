@@ -90,10 +90,7 @@ async function getVehicleDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching vehicle data:', error);
-        return {
-            name: 'Unknown',
-            cargoCapacity: 0,
-        };
+        throw error;
     }
 }
 

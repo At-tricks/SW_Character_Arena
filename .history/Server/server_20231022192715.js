@@ -2,6 +2,7 @@ const express = require('express');
 const dataAccess = require('./dataAccess');
 const compareson = require('./comparisonLogic')
 const app = express();
+const port = 3000;
 
 app.get('/search', async (req, res) => {
     //const character1Name = req.query.character1;
