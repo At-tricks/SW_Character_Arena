@@ -1,51 +1,5 @@
 const swapi = require('swapi-node');
 
-//Return all Character names
-async function getAllPeopleNames() {
-    try {
-        const allPeople = await swapi.get('people');
-        const peopleNames = allPeople.results.map((person) => person.name);
-        return peopleNames;
-    } catch (error) {
-        console.error('Error fetching people names:', error);
-        throw error;
-    }
-}
-
-//Return all possible eye colors of characters
-async function getAllEyeColors() {
-    try {
-        const allPeople = await swapi.get('people');
-        const eyeColors = new Set();
-
-        allPeople.results.forEach((person) => {
-            eyeColors.add(person.eye_color);
-        });
-
-        return Array.from(eyeColors);
-    } catch (error) {
-        console.error('Error fetching eye color data:', error);
-        throw error;
-    }
-}
-
-//Return all possible Hair Colors of characters
-async function getAllHairColors() {
-    try {
-        const allPeople = await swapi.get('people');
-        const hairColors = new Set();
-
-        allPeople.results.forEach((person) => {
-            hairColors.add(person.hair_color);
-        });
-
-        return Array.from(hairColors);
-    } catch (error) {
-        console.error('Error fetching hair color data:', error);
-        throw error;
-    }
-}
-
 //Return character home world's Name and Diameter
 async function getHomeWorldDetails(url) {
     try {
@@ -123,8 +77,8 @@ async function getCharacterByName(name) {
 };
 
 module.exports = {
-    getAllPeopleNames,
-    getAllEyeColors,
-    getAllHairColors,
     getCharacterByName,
+    getAllHomeWorldValues,
+    getAllSpeciesValues,
+    getAllVehicleValues,
 };

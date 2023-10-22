@@ -18,12 +18,10 @@ app.get('/search', async (req, res) => {
     }
 
     try {
-        const allCharacterNames = await dataAccess.getAllPeopleNames();
-        const allColorValues = await compareson.convertAttributeValues();
         const character1Data = await dataAccess.getCharacterByName(character1Name);
         const character2Data = await dataAccess.getCharacterByName(character2Name);
 
-        const comparisonResult = compareson.compareAttributes(character1Data, character2Data, allColorValues);
+        const comparisonResult = compareson.compareAttributes(character1Data, character2Data);
         const overallWinner = compareson.calculateOverallWinner(comparisonResult, character1Data, character2Data)
 
         res.json({

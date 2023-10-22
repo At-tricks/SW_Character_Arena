@@ -1,6 +1,5 @@
 const swapi = require('swapi-node');
 
-//Return all Character names
 async function getAllPeopleNames() {
     try {
         const allPeople = await swapi.get('people');

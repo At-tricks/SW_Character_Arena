@@ -1,3 +1,56 @@
+const {
+    getAllEyeColors,
+    getAllHairColors
+} = require('./dataAccess');
+
+function convertAttributesToInt(character) {
+    // Convert birth_year (e.g., "33BBY" to integer)
+    const birthYear = parseInt(character.birthYear);
+
+    // Convert height and mass to integers
+    const height = parseInt(character.height);
+    const mass = parseInt(character.mass);
+
+    return {
+        ...character, // Keep the existing attributes
+        birthYear,
+        height,
+        mass,
+    };
+}
+
+async function convertAttributeValues(character1, character2) {
+    // Retrieve available eye colors and hair colors
+    const eyeColors = await getAllEyeColors();
+    const hairColors = await getAllHairColors();
+
+    // Create objects for eye colors and hair colors
+    const eyeColorValues = {};
+    const hairColorValues = {};
+
+    // Assign unique integer values to each eye color
+    let uniqueValue = 10;
+    for (const color of eyeColors) {
+        eyeColorValues[color] = uniqueValue;
+        uniqueValue += 10; // Increase by 10 for uniqueness
+    }
+
+    // Reset unique value
+    uniqueValue = 10;
+
+    // Assign unique integer values to each hair color
+    for (const color of hairColors) {
+        hairColorValues[color] = uniqueValue;
+        uniqueValue += 10;
+    }
+
+    // Return the objects with assigned values
+    return {
+        eyeColors: eyeColorValues,
+        hairColors: hairColorValues,
+    };
+};
+
 function compareAttributes(character1, character2) {
     const attributes = [
         'birth_year',

@@ -1,17 +1,5 @@
 const swapi = require('swapi-node');
 
-//Return all Character names
-async function getAllPeopleNames() {
-    try {
-        const allPeople = await swapi.get('people');
-        const peopleNames = allPeople.results.map((person) => person.name);
-        return peopleNames;
-    } catch (error) {
-        console.error('Error fetching people names:', error);
-        throw error;
-    }
-}
-
 //Return all possible eye colors of characters
 async function getAllEyeColors() {
     try {
@@ -123,8 +111,7 @@ async function getCharacterByName(name) {
 };
 
 module.exports = {
-    getAllPeopleNames,
+    getCharacterByName,
     getAllEyeColors,
     getAllHairColors,
-    getCharacterByName,
 };
