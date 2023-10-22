@@ -7,8 +7,6 @@ const port = 3000;
 app.get('/search', async (req, res) => {
     const character1Name = req.query.character1;
     const character2Name = req.query.character2;
-    //const character1Name = "Luke Skywalker";
-    //const character2Name = "R2-D2";
 
     if (!character1Name || !character2Name) {
         res.status(400).json({

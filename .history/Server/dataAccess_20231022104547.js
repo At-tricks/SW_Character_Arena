@@ -1,6 +1,5 @@
 const swapi = require('swapi-node');
 
-//Return all available home worlds' Names and Diameters
 async function getAllHomeWorldValues() {
     try {
         const allHomeWorlds = await swapi.get('planets');
@@ -20,7 +19,6 @@ async function getAllHomeWorldValues() {
     }
 }
 
-//Return all available species' Names and Life Spans
 async function getAllSpeciesValues() {
     try {
         const allSpecies = await swapi.get('species');
@@ -40,7 +38,6 @@ async function getAllSpeciesValues() {
     }
 }
 
-//Return all available vehicals' Names and Cargo Capacitys
 async function getAllVehicleValues() {
     try {
         const allVehicles = await swapi.get('vehicles');
@@ -60,7 +57,7 @@ async function getAllVehicleValues() {
     }
 }
 
-//Return character home world's Name and Diameter
+
 async function getHomeWorldDetails(url) {
     try {
         const homeWorldData = await swapi.getFromUrl(url);
@@ -74,7 +71,6 @@ async function getHomeWorldDetails(url) {
     }
 }
 
-//Return character species' Name and Life Span
 async function getSpeciesDetails(url) {
     try {
         const speciesData = await swapi.getFromUrl(url);
@@ -88,7 +84,6 @@ async function getSpeciesDetails(url) {
     }
 }
 
-//Return character vehicale's Name and Cargo Capacity
 async function getVehicleDetails(url) {
     try {
         const vehicleData = await swapi.getFromUrl(url);
@@ -102,7 +97,7 @@ async function getVehicleDetails(url) {
     }
 }
 
-//Return Character attributes
+
 async function getCharacterByName(name) {
     try {
         const characterData = await swapi.get('people', {
@@ -138,7 +133,4 @@ async function getCharacterByName(name) {
 
 module.exports = {
     getCharacterByName,
-    getAllHomeWorldValues,
-    getAllSpeciesValues,
-    getAllVehicleValues,
 };
