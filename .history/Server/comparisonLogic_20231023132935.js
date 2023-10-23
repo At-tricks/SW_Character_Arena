@@ -19,6 +19,8 @@ async function convertColorAttributesToInt() {
         uniqueValue += 10; // Increase by 10 for uniqueness
     }
 
+    console.log("convertColorAttributesToInt Eye color object: ", eyeColorValues);
+
     uniqueValue = 10;
 
     // Assign unique integer values to each hair color
@@ -26,6 +28,9 @@ async function convertColorAttributesToInt() {
         hairColorValues[color] = uniqueValue;
         uniqueValue += 10;
     }
+
+    console.log("convertColorAttributesToInt Hair color object:", hairColorValues);
+
 
     return {
         eyeColors: eyeColorValues,
@@ -108,9 +113,6 @@ function compareAttributes(character1, character2) {
         const comparisonType = attributeComparisonConfig[attribute];
         const value1 = character1;
         const value2 = character2;
-
-        console.log("compareAttributes value1 :", value1);
-        console.log("compareAttributes value2 :", value2);
 
         if (comparisonType === 'lower') {
             if (value1 < value2) {

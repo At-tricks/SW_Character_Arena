@@ -42,8 +42,8 @@ function parseIntOrNestedAttribute(value, nestedValue, defaultValue) {
 }
 
 //Convert all attributes of character object to int
-async function convertAttributesToInt(character) {
-    const colorValueSets = await convertColorAttributesToInt();
+function convertAttributesToInt(character) {
+    const colorValueSets = convertColorAttributesToInt();
 
     // Convert height, mass and birth_year to integers  (e.g. of Birth year format, "33BBY")
     character.birthYear = parseInt(character.birthYear);
@@ -51,19 +51,14 @@ async function convertAttributesToInt(character) {
     character.mass = parseInt(character.mass);
 
     // Map the character's eyeColor and hairColor to its corresponding integer value
-    if (character.eyeColor !== "0" && colorValueSets.eyeColors[character.eyeColor] !== undefined) {
+    if (character.eyeColor !== "0" && character.hairColor !== "0") {
         character.eyeColor = colorValueSets.eyeColors[character.eyeColor];
-    } else {
-        character.eyeColor = parseInt(character.eyeColor);
-    };
-    console.log("convertAttributesToInt character.eyeColor :", character.eyeColor);
-
-    if (character.hairColor !== "0" && colorValueSets.hairColors[character.hairColor] !== undefined) {
         character.hairColor = colorValueSets.hairColors[character.hairColor];
     } else {
+        character.eyeColor = parseInt(character.eyeColor);
         character.hairColor = parseInt(character.hairColor)
     }
-    console.log("convertAttributesToInt character.hairColor :", character.hairColor);
+
 
     // Convert nested object attributes
     character.homeWorld = parseIntOrNestedAttribute(character.homeWorld, character.homeWorld.diameter, "0");
@@ -73,7 +68,7 @@ async function convertAttributesToInt(character) {
     return character
 };
 
-//Compare the two characters' attributes
+
 function compareAttributes(character1, character2) {
     // Initialize results and wins for each character
     const results = {
@@ -106,12 +101,8 @@ function compareAttributes(character1, character2) {
     // Loop through the attributes defined in the configuration
     for (const attribute in attributeComparisonConfig) {
         const comparisonType = attributeComparisonConfig[attribute];
-        const value1 = character1;
-        const value2 = character2;
-
-        console.log("compareAttributes value1 :", value1);
-        console.log("compareAttributes value2 :", value2);
-
+        value1 = character1;
+        value2 = character2;
         if (comparisonType === 'lower') {
             if (value1 < value2) {
                 results.character1.wins++;

@@ -1,8 +1,8 @@
 const swapi = require('swapi-node');
 
 async function handleMissingAttribute(attribute, getDataFunction) {
-    if (!attribute || attribute.length === 0) {
-        return "0"
+    if (attribute === undefined) {
+        return "0"; // or use a sentinel value like null
     }
     try {
         // Fetch additional data
@@ -13,11 +13,8 @@ async function handleMissingAttribute(attribute, getDataFunction) {
     }
 }
 
-function assignDefaultIfUndefined(attribute, defaultValue) {
-    if (!attribute || attribute.length === 0) {
-        return defaultValue;
-    }
-    return attribute;
+function assignDefaultIfUndefined(value, defaultValue) {
+    return typeof value !== 'undefined' ? value : defaultValue;
 }
 
 //Return all Character names

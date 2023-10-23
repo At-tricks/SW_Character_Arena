@@ -1,8 +1,8 @@
 const swapi = require('swapi-node');
 
 async function handleMissingAttribute(attribute, getDataFunction) {
-    if (!attribute || attribute.length === 0) {
-        return "0"
+    if (attribute === undefined) {
+        return "0"; // or use a sentinel value like null
     }
     try {
         // Fetch additional data
@@ -13,11 +13,8 @@ async function handleMissingAttribute(attribute, getDataFunction) {
     }
 }
 
-function assignDefaultIfUndefined(attribute, defaultValue) {
-    if (!attribute || attribute.length === 0) {
-        return defaultValue;
-    }
-    return attribute;
+function assignDefaultIfUndefined(value, defaultValue) {
+    return typeof value !== 'undefined' ? value : defaultValue;
 }
 
 //Return all Character names
@@ -134,7 +131,9 @@ async function getCharacterByName(name) {
 
         // Fetch additional data
         character.homeWorld = await handleMissingAttribute(character.homeworld, getHomeWorldDetails);
+        console.log("Species:", character.species);
         character.species = await handleMissingAttribute(character.species, (species) => getSpeciesDetails(species[0]));
+        console.log("Species after handling:", character.species);
         character.vehicles = await handleMissingAttribute(character.vehicles, (vehicle) => getVehicleDetails(vehicle[0]));
 
         const completeCharacter = {

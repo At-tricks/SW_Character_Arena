@@ -19,6 +19,8 @@ async function convertColorAttributesToInt() {
         uniqueValue += 10; // Increase by 10 for uniqueness
     }
 
+    console.log("convertColorAttributesToInt Eye color object: ", eyeColorValues);
+
     uniqueValue = 10;
 
     // Assign unique integer values to each hair color
@@ -26,6 +28,9 @@ async function convertColorAttributesToInt() {
         hairColorValues[color] = uniqueValue;
         uniqueValue += 10;
     }
+
+    console.log("convertColorAttributesToInt Hair color object:", hairColorValues);
+
 
     return {
         eyeColors: eyeColorValues,

@@ -15,7 +15,7 @@ async function handleMissingAttribute(attribute, getDataFunction) {
 
 function assignDefaultIfUndefined(attribute, defaultValue) {
     if (!attribute || attribute.length === 0) {
-        return defaultValue;
+        return "defaultValue";
     }
     return attribute;
 }
