@@ -1,7 +1,5 @@
 const express = require('express');
 const dataAccess = require('./dataAccess');
-const character = require('./characterModel')
-const missingData = require('./missingDatalogic')
 const compareson = require('./comparisonLogic')
 const app = express();
 
@@ -17,13 +15,6 @@ app.get('/people-names', async (req, res) => {
     }
 });
 
-app.get('/character-details', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
 
 app.get('/search', async (req, res) => {
     //const character1Name = req.query.character1;
@@ -39,6 +30,7 @@ app.get('/search', async (req, res) => {
     }
 
     try {
+        const allCharacterNames = await dataAccess.getAllPeopleNames();
         const character1Data = await dataAccess.getCharacterByName(character1Name);
         const character2Data = await dataAccess.getCharacterByName(character2Name);
 
@@ -46,8 +38,7 @@ app.get('/search', async (req, res) => {
         const overallWinner = compareson.calculateOverallWinner(comparisonResult)
 
         res.json({
-            characters: {character1Data, character2Data},
-            comparisonResult,
+            result: comparisonResult,
             overallWinner
         });
     } catch (error) {

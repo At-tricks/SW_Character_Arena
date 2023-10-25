@@ -126,7 +126,7 @@ async function getCharacterByName(name) {
         const character = characterData.results[0];
 
         // Assign default values to attributes that may be missing
-        /* character.birth_year = assignDefaultIfUndefined(character.birth_year, "0");
+        character.birth_year = assignDefaultIfUndefined(character.birth_year, "0");
         character.height = assignDefaultIfUndefined(character.height, "0");
         character.mass = assignDefaultIfUndefined(character.mass, "0");
         character.eye_color = assignDefaultIfUndefined(character.eye_color, "0");
@@ -135,7 +135,7 @@ async function getCharacterByName(name) {
         // Fetch additional data
         character.homeWorld = await handleMissingAttribute(character.homeworld, getHomeWorldDetails);
         character.species = await handleMissingAttribute(character.species, (species) => getSpeciesDetails(species[0]));
-        character.vehicles = await handleMissingAttribute(character.vehicles, (vehicle) => getVehicleDetails(vehicle[0])); */
+        character.vehicles = await handleMissingAttribute(character.vehicles, (vehicle) => getVehicleDetails(vehicle[0]));
 
         const completeCharacter = {
             name: character.name,

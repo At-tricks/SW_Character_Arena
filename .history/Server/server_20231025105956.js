@@ -1,7 +1,5 @@
 const express = require('express');
 const dataAccess = require('./dataAccess');
-const character = require('./characterModel')
-const missingData = require('./missingDatalogic')
 const compareson = require('./comparisonLogic')
 const app = express();
 
@@ -46,8 +44,7 @@ app.get('/search', async (req, res) => {
         const overallWinner = compareson.calculateOverallWinner(comparisonResult)
 
         res.json({
-            characters: {character1Data, character2Data},
-            comparisonResult,
+            result: comparisonResult,
             overallWinner
         });
     } catch (error) {

@@ -46,8 +46,7 @@ app.get('/search', async (req, res) => {
         const overallWinner = compareson.calculateOverallWinner(comparisonResult)
 
         res.json({
-            characters: {character1Data, character2Data},
-            comparisonResult,
+            result: comparisonResult,
             overallWinner
         });
     } catch (error) {
