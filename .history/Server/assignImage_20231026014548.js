@@ -80,10 +80,6 @@ const characterImages = {
     "Grievous": "Grievous1.jpeg",
     "Tarfful": "Tarfful2.jpg",
     "Raymus Antilles": "Raymus-Antilles1.jpg",
-    "Sly Moore": "Sly-Moore1.jpeg",
-    "Tion Medon": "Tion-Medon1.jpeg"
+    "Sly Moore": "",
+    "Tion Medon": ""
 };
-
-function getCharacterImage(name) {
-    
-}

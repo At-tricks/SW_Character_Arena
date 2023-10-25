@@ -83,7 +83,3 @@ const characterImages = {
     "Sly Moore": "Sly-Moore1.jpeg",
     "Tion Medon": "Tion-Medon1.jpeg"
 };
-
-function getCharacterImage(name) {
-    
-}

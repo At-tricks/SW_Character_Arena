@@ -2,7 +2,6 @@ const express = require('express');
 const dataAccess = require('./dataAccess');
 const character = require('./characterModel')
 const missingData = require('./missingDatalogic')
-const characterImage = require('./assignImage')
 const compareson = require('./comparisonLogic')
 const app = express();
 
@@ -44,28 +43,20 @@ app.get('/search', async (req, res) => {
     }
 
     //Create character instance for both characters
-    let character1 = new character;
-    let character2 = new character;
+    let character1 = character;
+    let character2 = character;
     try {
         //Get character attributes from api
         const character1Attributes = await dataAccess.getCharacterByName(character1Name);
         const character2Attributes = await dataAccess.getCharacterByName(character2Name);
 
-        //Get character image
-        const character1Image = characterImage.getCharacterImage(character1Name);
-        const character2Image = characterImage.getCharacterImage(character2Name);
-
         //Check and hanle missing attribute values
         character1Attributes = await missingData.replaceMissingValues(character1Attributes);
         character2Attributes = await missingData.replaceMissingValues(character2Attributes);
-
         //Add image to character models and return the models at this point
-        character1 = character1(character1Name, character1Attributes, character1Image)
-        character2 = character2(character2Name, character2Attributes, character2Image)
 
         // Compare character attributes
         const comparisonResult = compareson.compareAttributes(character1Attributes, character2Attributes);
-        
         //Calculate winner character
         const overallWinner = compareson.calculateOverallWinner(comparisonResult)
 

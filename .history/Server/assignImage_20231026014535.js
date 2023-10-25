@@ -79,11 +79,7 @@ const characterImages = {
     "Shaak Ti": "Shaak-ti1.jpeg",
     "Grievous": "Grievous1.jpeg",
     "Tarfful": "Tarfful2.jpg",
-    "Raymus Antilles": "Raymus-Antilles1.jpg",
-    "Sly Moore": "Sly-Moore1.jpeg",
-    "Tion Medon": "Tion-Medon1.jpeg"
+    "Raymus Antilles": "",
+    "Sly Moore": "",
+    "Tion Medon": ""
 };
-
-function getCharacterImage(name) {
-    
-}

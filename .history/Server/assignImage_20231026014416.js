@@ -75,15 +75,11 @@ const characterImages = {
     "Jocasta Nu": "Jocasta-Nu1.jpeg",
     "R4-P17": "R4-P17_2.jpg",
     "Wat Tambor": "Wat-Tambor1.jpg",
-    "San Hill": "San-Hill3.jpg",
-    "Shaak Ti": "Shaak-ti1.jpeg",
-    "Grievous": "Grievous1.jpeg",
-    "Tarfful": "Tarfful2.jpg",
-    "Raymus Antilles": "Raymus-Antilles1.jpg",
-    "Sly Moore": "Sly-Moore1.jpeg",
-    "Tion Medon": "Tion-Medon1.jpeg"
+    "San Hill": "",
+    "Shaak Ti": "",
+    "Grievous": "",
+    "Tarfful": "",
+    "Raymus Antilles": "",
+    "Sly Moore": "",
+    "Tion Medon": ""
 };
-
-function getCharacterImage(name) {
-    
-}
