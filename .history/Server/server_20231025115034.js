@@ -17,24 +17,20 @@ app.get('/people-names', async (req, res) => {
     }
 });
 
-/* app.get('/character-details', async (req, res) => {
+app.get('/character-details', async (req, res) => {
     try {
         
     } catch (error) {
         
     }
-}); */
+});
 
 app.get('/search', async (req, res) => {
-    //Get character names
-    const character1Name = req.query.character1;
-    const character2Name = req.query.character2;
+    //const character1Name = req.query.character1;
+    //const character2Name = req.query.character2;
+    const character1Name = "Luke Skywalker";
+    const character2Name = "R2-D2";
 
-    //test names
-    //const character1Name = "Luke Skywalker";
-    //const character2Name = "R2-D2";
-
-    //Check than both are populated
     if (!character1Name || !character2Name) {
         res.status(400).json({
             error: 'Both character names are required'
@@ -42,20 +38,11 @@ app.get('/search', async (req, res) => {
         return;
     }
 
-    //Create character instance for both characters
-
     try {
-        //Get character attributes from api
         const character1Attributes = await dataAccess.getCharacterByName(character1Name);
         const character2Attributes = await dataAccess.getCharacterByName(character2Name);
 
-        //Check and hanle missing attribute values
-
-        //Add image to character models and return the models at this point
-
-        // Compare character attributes
         const comparisonResult = compareson.compareAttributes(character1Attributes, character2Attributes);
-        //Calculate winner character
         const overallWinner = compareson.calculateOverallWinner(comparisonResult)
 
         res.json({

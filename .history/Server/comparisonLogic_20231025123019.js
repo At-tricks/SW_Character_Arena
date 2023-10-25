@@ -33,6 +33,14 @@ async function convertColorAttributesToInt() {
     };
 };
 
+//Helper function for convertAttributesToInt
+function parseIntOrNestedAttribute(value, nestedValue, defaultValue) {
+    if (value === defaultValue) {
+        return parseInt(defaultValue);
+    }
+    return parseInt(nestedValue);
+}
+
 //Convert all attributes of character object to int
 async function convertAttributesToInt(character) {
     const colorValueSets = await convertColorAttributesToInt();
@@ -62,9 +70,9 @@ async function convertAttributesToInt(character) {
     console.log("convertAttributesToInt character.hairColor :", character.hairColor);
 
     // Convert nested object attributes
-    character.homeWorld = parseInt(character.homeWorld.diameter);
-    character.species = parseInt(character.species.lifeSpan);
-    character.vehicles = parseInt(character.vehicles.cargoCapacity);
+    character.homeWorld = parseIntOrNestedAttribute(character.homeWorld, character.homeWorld.diameter, "0");
+    character.species = parseIntOrNestedAttribute(character.species, character.species.lifeSpan, "0");
+    character.vehicles = parseIntOrNestedAttribute(character.vehicles, character.vehicles.cargoCapacity, "0");
 
     return character
 };

@@ -98,6 +98,10 @@ async function getSpeciesDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching species data:', error);
+        return {
+            name: 'Unknown',
+            lifeSpan: "0",
+        };
     }
 }
 
@@ -118,6 +122,10 @@ async function getVehicleDetails(url) {
         };
     } catch (error) {
         console.error('Error fetching vehicle data:', error);
+        return {
+            name: 'Unknown',
+            cargoCapacity: "0",
+        };
     }
 }
 
@@ -129,13 +137,31 @@ async function getCharacterByName(name) {
         });
         const character = characterData.results[0];
 
+        // Assign default values to attributes that may be missing
+        /* character.birth_year = assignDefaultIfUndefined(character.birth_year, "0");
+        character.height = assignDefaultIfUndefined(character.height, "0");
+        character.mass = assignDefaultIfUndefined(character.mass, "0");
+        character.eye_color = assignDefaultIfUndefined(character.eye_color, "0");
+        character.hair_color = assignDefaultIfUndefined(character.hair_color, "0");
 
         // Fetch additional data
-        character.homeWorld = getHomeWorldDetails(character.homeworld);
-        character.species = getSpeciesDetails(character.species);
-        character.vehicles = getVehicleDetails(character.vehicles);
+        character.homeWorld = await handleMissingAttribute(character.homeworld, getHomeWorldDetails);
+        character.species = await handleMissingAttribute(character.species, (species) => getSpeciesDetails(species[0]));
+        character.vehicles = await handleMissingAttribute(character.vehicles, (vehicle) => getVehicleDetails(vehicle[0])); */
 
-        return character;
+        const completeCharacter = {
+            name: character.name,
+            birthYear: character.birth_year,
+            height: character.height,
+            mass: character.mass,
+            eyeColor: character.eye_color,
+            hairColor: character.hair_color,
+            homeWorld: character.homeWorld,
+            species: character.species,
+            vehicles: character.vehicles,
+        };
+
+        return completeCharacter;
 
     } catch (error) {
         console.error('Error fetching character data:', error);

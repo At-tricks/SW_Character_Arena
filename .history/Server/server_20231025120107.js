@@ -17,20 +17,18 @@ app.get('/people-names', async (req, res) => {
     }
 });
 
-/* app.get('/character-details', async (req, res) => {
+app.get('/character-details', async (req, res) => {
     try {
         
     } catch (error) {
         
     }
-}); */
+});
 
 app.get('/search', async (req, res) => {
     //Get character names
     const character1Name = req.query.character1;
     const character2Name = req.query.character2;
-
-    //test names
     //const character1Name = "Luke Skywalker";
     //const character2Name = "R2-D2";
 
