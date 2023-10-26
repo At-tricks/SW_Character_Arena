@@ -37,20 +37,20 @@ app.get('/search', async (req, res) => {
 
     try {
         //Get character attributes from api
-        let character1Attributes = await dataAccess.getCharacterByName(character1Name);
-        let character2Attributes = await dataAccess.getCharacterByName(character2Name);
+        const character1Attributes = await dataAccess.getCharacterByName(character1Name);
+        const character2Attributes = await dataAccess.getCharacterByName(character2Name);
 
         //Get character image
         const character1Image = await characterImage(character1Name);
         const character2Image = await characterImage(character2Name);
 
         //Check and hanle missing attribute values
-        character1Attributes = await missingData.replaceMissingValues(character1Attributes);
-        character2Attributes = await missingData.replaceMissingValues(character2Attributes);
+        const character1MissingReplaced = await missingData.replaceMissingValues(character1Attributes);
+        const character2MissingReplaced = await missingData.replaceMissingValues(character2Attributes);
 
         //Add image to character models and return the models at this point
-        const character1 = new character(character1Name, character1Attributes, character1Image)
-        const character2 = new character(character2Name, character2Attributes, character2Image)
+        const character1 = new character(character1Name, character1MissingReplaced, character1Image)
+        const character2 = new character(character2Name, character2MissingReplaced, character2Image)
 
         // Compare character attributes
         const comparisonResult = compareson.compareAttributes(character1Attributes, character2Attributes);

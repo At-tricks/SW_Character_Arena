@@ -1,4 +1,5 @@
 const swapi = require('swapi-node');
+const attributes = require('./attributeModel');
 
 //Return all Character names
 async function getAllPeopleNames() {
@@ -71,7 +72,7 @@ async function getSpeciesDetails(url) {
     if (!url || url.length === 0) {
         return {
             name: 'Unknown',
-            diameter: "0",
+            lifeSpan: "0",
         };
     };
 
@@ -91,7 +92,7 @@ async function getVehicleDetails(url) {
     if (!url || url.length === 0) {
         return {
             name: 'Unknown',
-            diameter: "0",
+            cargoCapacity: "0",
         };
     };
 
@@ -112,15 +113,15 @@ async function getCharacterByName(name) {
         const characterData = await swapi.get('people', {
             search: name
         });
-        const character = characterData.results[1];
-
+        const character = characterData.results[0];
+        let characterAttributes = new attributes(character);
 
         // Fetch additional data
-        character.homeWorld = await getHomeWorldDetails(character.homeworld);
-        character.species = await getSpeciesDetails(character.species[0]);
-        character.vehicles = await getVehicleDetails(character.vehicles[0]);
+        characterAttributes.homeWorld = await getHomeWorldDetails(character.homeworld);
+        characterAttributes.species = await getSpeciesDetails(character.species[0]);
+        characterAttributes.vehicles = await getVehicleDetails(character.vehicles[0]);
 
-        return character;
+        return characterAttributes;
 
     } catch (error) {
         console.error('Error fetching character data:', error);
