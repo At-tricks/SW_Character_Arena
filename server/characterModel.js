@@ -4,4 +4,6 @@ class Character {
         this.attributes = attributes;
         this.image = image;
     }
-}
+};
+
+module.exports = Character;

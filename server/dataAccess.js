@@ -1,20 +1,5 @@
 const swapi = require('swapi-node');
 
-/* async function handleMissingAttribute(attribute, getDataFunction) {
-    if (!attribute || attribute.length === 0) {
-        return "0"
-    }
-    try {
-        // Fetch additional data
-        return await getDataFunction(attribute);
-    } catch (error) {
-        console.error(`Error fetching ${attribute} data:`, error);
-        return "0"; // or use a sentinel value
-    }
-}
-
-*/
-
 //Return all Character names
 async function getAllPeopleNames() {
     try {
@@ -127,13 +112,13 @@ async function getCharacterByName(name) {
         const characterData = await swapi.get('people', {
             search: name
         });
-        const character = characterData.results[0];
+        const character = characterData.results[1];
 
 
         // Fetch additional data
-        character.homeWorld = getHomeWorldDetails(character.homeworld);
-        character.species = getSpeciesDetails(character.species);
-        character.vehicles = getVehicleDetails(character.vehicles);
+        character.homeWorld = await getHomeWorldDetails(character.homeworld);
+        character.species = await getSpeciesDetails(character.species[0]);
+        character.vehicles = await getVehicleDetails(character.vehicles[0]);
 
         return character;
 

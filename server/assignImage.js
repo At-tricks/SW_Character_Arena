@@ -1,4 +1,4 @@
-//Should add the the character image to the character object
+//Should return the the character image url
 const characterImages = {
     "Luke Skywalker": "Luke-Skywalker3.jpeg",
     "C-3PO": "C-3PO_2.jpg",
@@ -85,5 +85,12 @@ const characterImages = {
 };
 
 function getCharacterImage(name) {
-    
-}
+    // Check if the character name exists in the characterImages object
+    if (name in characterImages) {
+        return characterImages[name];
+    } else {
+        return null;
+    }
+};
+
+module.exports = getCharacterImage;
